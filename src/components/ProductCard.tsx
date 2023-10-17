@@ -2,7 +2,7 @@ import Image  from 'next/image';
 import InteractiveCard from './InteractiveCard';
 import BasicRating from './BasicRating';
 
-export default function ProductCard( { hospitalName, imgSrc, onCompare } : {hospitalName:string, imgSrc: string, onCompare:Function}) {
+export default function ProductCard( { hospitalName, imgSrc, onCompare } : {hospitalName:string, imgSrc: string, onCompare?:Function}) {
   
     return (
         <InteractiveCard contentName= { hospitalName } >
@@ -20,9 +20,12 @@ export default function ProductCard( { hospitalName, imgSrc, onCompare } : {hosp
             hover:bg-indigo-600 mx-2 px-1 py-1 text-white shadow-sm'
             onClick={ (e)=> { e.stopPropagation(); onCompare(hospitalName)}}
             >Compare</button> */}
-            <div className='w-full p-[5px]'  onClick={ (e)=> { e.stopPropagation(); onCompare(hospitalName)}}>
+            {
+                onCompare ? <div className='w-full p-[5px]'  onClick={ (e)=> { e.stopPropagation(); onCompare(hospitalName)}}>
                 <BasicRating rating={0} />
-            </div>
+                </div> : ''
+            }
+            
           
         </InteractiveCard>
 
